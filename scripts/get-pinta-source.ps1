@@ -13,8 +13,7 @@
     Pinta release tag to fetch, 3.1.2 by default.
 
 .PARAMETER Destination
-    Extraction directory. Defaults to ..\Pinta-<Version>-src relative to this
-    script.
+    Extraction directory. Defaults to ../Pinta-<Version>-src next to the repository.
 
 .EXAMPLE
     pwsh ./scripts/get-pinta-source.ps1
@@ -22,7 +21,7 @@
 #>
 param(
     [string]$Version = '3.1.2',
-    [string]$Destination = (Join-Path $PSScriptRoot "..\Pinta-$Version-src")
+    [string]$Destination = (Join-Path $PSScriptRoot "..\..\Pinta-$Version-src")
 )
 
 $ErrorActionPreference = 'Stop'
@@ -49,3 +48,4 @@ if (-not (Test-Path $project)) {
 
 Remove-Item $archive -ErrorAction SilentlyContinue
 Write-Host "Done: $Destination"
+

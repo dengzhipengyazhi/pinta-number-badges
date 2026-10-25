@@ -38,7 +38,7 @@ jobs:
       - name: Build add-in
         run: >-
           dotnet build PintaNumberBadges.csproj -c Release
-          -p:PintaSourceDir="$PWD/Pinta-${{ env.PINTA_VERSION }}-src"
+          -p:PintaSourceDir="${{ github.workspace }}/../Pinta-${{ env.PINTA_VERSION }}-src"
 
       - name: Install Mono.Addins packaging tool
         run: dotnet tool install --global Mono.Addins.UtilTool
@@ -62,3 +62,4 @@ jobs:
             bin/Release/net8.0/PintaNumberBadges.dll
             package/*.mpack
           if-no-files-found: error
+

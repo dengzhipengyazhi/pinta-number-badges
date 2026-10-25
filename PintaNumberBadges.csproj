@@ -40,9 +40,15 @@
 		<EmbeddedResource Include=".addin.xml" />
 	</ItemGroup>
 
+
+	<!-- Never compile source files that belong to a Pinta checkout. The build
+	     reference can be a sibling directory, a git submodule (Pinta/), or an
+	     extracted source tree (Pinta-3.1.2-src/) - only the compiled add-in
+	     sources in this repository should be part of the assembly. -->
+	<ItemGroup>
+		<Compile Remove="Pinta/**; Pinta-*/**" />
+		<EmbeddedResource Remove="Pinta/**; Pinta-*/**" />
+		<None Remove="Pinta/**; Pinta-*/**" />
+	</ItemGroup>
+
 </Project>
-
-
-
-
-
