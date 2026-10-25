@@ -1,0 +1,18 @@
+# Normalize line endings in the repository, regardless of the local git config.
+* text=auto
+
+*.png binary
+*.mpack binary
+*.ico binary
+*.dll binary
+
+# Shell/PowerShell scripts
+*.ps1 text eol=crlf
+*.sh text eol=lf
+
+# Source and docs
+*.cs text eol=lf
+*.csproj text eol=lf
+*.yml text eol=lf
+*.md text eol=lf
+*.xml text eol=lf

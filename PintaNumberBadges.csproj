@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<RootNamespace>PintaNumberBadges</RootNamespace>
+		<AssemblyName>PintaNumberBadges</AssemblyName>
+		<TargetFramework Condition="'$(TargetFramework)' == ''">net8.0</TargetFramework>
+		<Version>1.1.0</Version>
+		<Authors>dengzhipengyazhi</Authors>
+		<Description>A Pinta add-in that stamps numbered circular badges (filled or hand-drawn marker rings) onto images.</Description>
+		<RepositoryUrl>https://github.com/dengzhipengyazhi/pinta-number-badges</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<Nullable>enable</Nullable>
+			<DebugType Condition="'$(Configuration)' == 'Release'">none</DebugType>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+		<!-- We embed the add-in manifest (.addin.xml) into the assembly, like the
+		     official PintaDemoExtension / FarbfeldFormatAddin samples do. -->
+		<EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<!-- Point this at a checkout of the Pinta source tree (the version you
+		     want to build against). Can be overridden on the command line:
+		       dotnet build -p:PintaSourceDir=C:\src\Pinta
+		     A git submodule works well here, as done by the official add-ins. -->
+		<PintaSourceDir Condition="'$(PintaSourceDir)' == ''">$(MSBuildThisFileDirectory)../Pinta-3.1.2-src</PintaSourceDir>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- Mono.Addins is needed at compile time for the [Extension] attribute.
+		     The runtime copy is provided by Pinta itself, so it is not bundled. -->
+		<PackageReference Include="Mono.Addins" Version="1.4.2-alpha.4" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="$(PintaSourceDir)/Pinta.Core/Pinta.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include=".addin.xml" />
+	</ItemGroup>
+
+</Project>
+
+
+
+
+

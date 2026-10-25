@@ -1,0 +1,64 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOTNET_VERSION: 8.0.x
+  PINTA_VERSION: 3.1.2
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Fetch Pinta source
+        run: pwsh -NoProfile -File ./scripts/get-pinta-source.ps1 -Version "${{ env.PINTA_VERSION }}"
+
+      - name: Build add-in
+        run: >-
+          dotnet build PintaNumberBadges.csproj -c Release
+          -p:PintaSourceDir="$PWD/Pinta-${{ env.PINTA_VERSION }}-src"
+
+      - name: Install Mono.Addins packaging tool
+        run: dotnet tool install --global Mono.Addins.UtilTool
+
+      - name: Pack .mpack
+        env:
+          # Mono.Addins.UtilTool targets .NET 6; run it on the available newer runtime.
+          DOTNET_ROLL_FORWARD: LatestMajor
+        run: |
+          export PATH="$HOME/.dotnet/tools:$PATH"
+          mkdir -p package
+          cp bin/Release/net8.0/PintaNumberBadges.dll package/
+          cd package
+          mautil pack PintaNumberBadges.dll
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: PintaNumberBadges
+          path: |
+            bin/Release/net8.0/PintaNumberBadges.dll
+            package/*.mpack
+          if-no-files-found: error

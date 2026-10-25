@@ -1,0 +1,18 @@
+# Build output
+bin/
+obj/
+.vs/
+*.user
+
+# Pinta source checkout used as the compile-time reference.
+# Fetch it with scripts/get-pinta-source.ps1
+Pinta-3.1.2-src/
+Pinta/
+Pinta-*.tar.gz
+
+# Staged DLL before `mautil pack`; the .mpack itself is committed
+package/*.dll
+
+# Local scratch
+fc-cache/
+*.log

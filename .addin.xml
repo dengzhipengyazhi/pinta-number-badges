@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Addin id="PintaNumberBadges" version="1.1" category="Tools">
+
+	<!-- Shown in Pinta's Add-in Manager. -->
+	<Header>
+		<Name>Numbered Badges / 数字圆标</Name>
+		<Description>Adds a tool that stamps numbered circular badges onto the image, with filled or marker-style hand-drawn rings. / 添加一个在图片上放置「圆圈+数字」标记的工具，支持实心徽章与马克笔手绘圆圈。</Description>
+		<Author>dengzhipengyazhi</Author>
+	</Header>
+
+	<!-- Declare the minimum required version of Pinta. 3.1 is the API version
+	     this add-in was compiled against; newer versions keep the 3.1
+	     compatibility level (see PintaCore.AddinCompatVersion). -->
+	<Dependencies>
+		<Addin id="Pinta" version="3.1" />
+	</Dependencies>
+
+</Addin>
+
+
