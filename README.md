@@ -8,11 +8,11 @@
 
 支持两种风格：**实心徽章** 和 **马克笔/手绘圆圈**（圆圈内部透明、线条不规则、数字用手写字体）。
 
-![两种风格](docs/sample-badges.png)
+![两种风格](https://github.com/dengzhipengyazhi/pinta-number-badges/releases/download/v1.1.0/sample-badges.png)
 
 **手绘红圈效果**：
 
-![手绘红圈示例](docs/handdrawn-example.png)
+![手绘红圈示例](https://github.com/dengzhipengyazhi/pinta-number-badges/releases/download/v1.1.0/handdrawn-example.png)
 
 > 两张图都由插件真实的 `BadgeRenderer` 代码渲染（没有启动 Pinta 图形界面，直接用 Pinta 的 Cairo/Pango 栈生成），即最终落到图片上的实际效果。
 
